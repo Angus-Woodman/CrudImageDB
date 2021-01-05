@@ -18,4 +18,7 @@ mongoose
 // Middleware
 app.use(express.json());
 
+// Routes
+app.use('/user', require('./routes/user'))
+
 app.listen(5000, () => console.log("Server is running"));
