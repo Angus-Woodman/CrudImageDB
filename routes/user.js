@@ -3,10 +3,24 @@ const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
 const User = require("../model/user"); 
 
+router.get("/", async (req, res) => {
+    try {
+        let user = await User.find();
+        res.json(user);
+    } catch (err) {
+        console.log(err);
+    }});
+
 router.post("/", upload.single("image"), async (req, res) => {
   try {
+    console.log(req.body)
+    // console.log(req.file.path)
+
     // Upload image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
+
+    console.log(req)
+
      // Create new user
     let user = new User({
       name: req.body.name,
@@ -19,14 +33,6 @@ router.post("/", upload.single("image"), async (req, res) => {
   } catch (err) {
     console.log(err);
   }}); 
-
-router.get("/", async (req, res) => {
-try {
-    let user = await User.find();
-    res.json(user);
-} catch (err) {
-    console.log(err);
-}});
 
 router.delete("/:id", async (req, res) => {
     try {
