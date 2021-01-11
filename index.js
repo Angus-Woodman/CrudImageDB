@@ -21,4 +21,7 @@ app.use(express.json());
 // Routes
 app.use('/user', require('./routes/user'))
 
-app.listen(5000, () => console.log("Server is running"));
+// app.listen(5000, () => console.log("Server is running"));
+
+const port = process.env.PORT || 5000; // if there is no PORT env variable, 3000 will be used
+app.listen(port, () => console.log(`Express is running on port ${port}`))
