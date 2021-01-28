@@ -13,17 +13,13 @@ router.get("/", async (req, res) => {
 
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    console.log(req.body)
-    // console.log(req.file.path)
-
     // Upload image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
-
-    console.log(req)
 
      // Create new user
     let user = new User({
       name: req.body.name,
+      emoji: req.body.emoji,
       avatar: result.secure_url,
       cloudinary_id: result.public_id,
     });
@@ -57,6 +53,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
         const result = await cloudinary.uploader.upload(req.file.path);
         const data = {
         name: req.body.name || user.name,
+        emoji: req.body.emoji || user.emoji,
         avatar: result.secure_url || user.avatar,
         cloudinary_id: result.public_id || user.cloudinary_id,
         };
