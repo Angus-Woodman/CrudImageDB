@@ -3,9 +3,6 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  emoji: {
-    type: Array,
-  },
   avatar: {
     type: String,
   },
