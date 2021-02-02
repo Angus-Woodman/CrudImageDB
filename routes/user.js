@@ -22,9 +22,9 @@ router.post("/", upload.single("image"), async (req, res) => {
       avatar: result.secure_url,
       lens: req.body.lens,
       camera: req.body.camera,
-      emoji1: req.body.emoji1 || user.emoji1,
-      emoji2: req.body.emoji2 || user.emoji2,
-      emoji3: req.body.emoji3 || user.emoji3,
+      emoji1: '0',
+      emoji2: '0',
+      emoji3: '0',
       comments: [],
       cloudinary_id: result.public_id,
     });
