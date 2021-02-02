@@ -12,8 +12,14 @@ const userSchema = new mongoose.Schema({
   camera: {
     type: String,
   },
-  emojis: {
-    type: Array,
+  emoji1: {
+    type: String,
+  },
+  emoji2: {
+    type: String,
+  },
+  emoji3: {
+    type: String,
   },
   comments: {
     type: Array,

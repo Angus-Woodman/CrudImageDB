@@ -22,7 +22,9 @@ router.post("/", upload.single("image"), async (req, res) => {
       avatar: result.secure_url,
       lens: req.body.lens,
       camera: req.body.camera,
-      emojis: ['0' , '0', '0'],
+      emoji1: req.body.emoji1 || user.emoji1,
+      emoji2: req.body.emoji2 || user.emoji2,
+      emoji3: req.body.emoji3 || user.emoji3,
       comments: [],
       cloudinary_id: result.public_id,
     });
@@ -50,18 +52,15 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", upload.single("image"), async (req, res) => {
     try {
         let user = await User.findById(req.params.id);
-        // Delete image from cloudinary
-        await cloudinary.uploader.destroy(user.cloudinary_id);
-        // Upload image to cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
+        
         const data = {
         name: req.body.name || user.name,
-        avatar: result.secure_url || user.avatar,
         lens: req.body.lens || user.lens,
         camera: req.body.camera || user.camera,
-        emojis: req.body.emojis || user.emojis,
+        emoji1: req.body.emoji1 || user.emoji1,
+        emoji2: req.body.emoji2 || user.emoji2,
+        emoji3: req.body.emoji3 || user.emoji3,
         comments:req.body.comments || user.comments,
-        cloudinary_id: result.public_id || user.cloudinary_id,
         };
         user = await User.findByIdAndUpdate(req.params.id, data, {
     new: true
