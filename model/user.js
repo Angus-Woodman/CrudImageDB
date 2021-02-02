@@ -6,6 +6,18 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+  lens: {
+    type: String,
+  },
+  camera: {
+    type: String,
+  },
+  emojis: {
+    type: Array,
+  },
+  comments: {
+    type: Array,
+  },
   cloudinary_id: {
     type: String,
   },
