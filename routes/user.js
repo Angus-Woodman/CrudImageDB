@@ -20,6 +20,10 @@ router.post("/", upload.single("image"), async (req, res) => {
     let user = new User({
       name: req.body.name,
       avatar: result.secure_url,
+      lens: req.body.lens,
+      camera: req.body.camera,
+      emojis: ['0' , '0', '0'],
+      comments: [],
       cloudinary_id: result.public_id,
     });
     // Save user
@@ -53,6 +57,10 @@ router.put("/:id", upload.single("image"), async (req, res) => {
         const data = {
         name: req.body.name || user.name,
         avatar: result.secure_url || user.avatar,
+        lens: req.body.lens || user.lens,
+        camera: req.body.camera || user.camera,
+        emojis: req.body.emojis || user.emojis,
+        comments:req.body.comments || user.comments,
         cloudinary_id: result.public_id || user.cloudinary_id,
         };
         user = await User.findByIdAndUpdate(req.params.id, data, {
